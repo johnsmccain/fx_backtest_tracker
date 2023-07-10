@@ -8,15 +8,29 @@ const Sumary = () => {
 			<div className={`${innerWrapStyle} w-full flex  justify-between`}>
 				<div className="">
 					<div className="text-center">Winrate</div>
-					<div className="text-center">
+					<div
+						className={`${
+							(data.profits_no / data.count) * 100 > 0
+								? "text-green-600"
+								: "text-red-600"
+						} text-center`}>
 						{((data.profits_no / data.count) * 100).toFixed(0)}%
 					</div>
 				</div>
 				<div className="">
 					<p className="text-center">PnL</p>
 					<div className="text-center">
-						<span className="text-green-600">{data.profits_no}W</span>/
-						<span className="text-red-600">{data.losses_no}L</span>
+						<span
+							className={`${
+								(Number(data.losses_no) / Number(data.profits_no)) * 1 > 0
+									? "text-green-600"
+									: "text-red-600"
+							} text-center`}>
+							{((Number(data.losses_no) / Number(data.profits_no)) * 1).toFixed(
+								2
+							)}
+							%
+						</span>
 					</div>
 				</div>
 				<div className="">
@@ -25,11 +39,9 @@ const Sumary = () => {
 				</div>
 				<div className="">
 					<div className="text-center">Wins / Losses</div>
-					<div
-						className={`${
-							data.profits > 0 ? "text-green-600" : "text-red-600"
-						} text-center`}>
-						{data.profits}
+					<div className="text-center">
+						<span className="text-green-600">{data.profits_no}W</span>/
+						<span className="text-red-600">{data.losses_no}L</span>
 					</div>
 				</div>
 			</div>

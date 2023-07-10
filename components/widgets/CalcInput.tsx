@@ -8,11 +8,15 @@ import {
 	setInitial,
 } from "../../redux/slice";
 const CalcInput = () => {
-	const [capital, setcapital] = useState();
-	const [risk, setrisk] = useState();
-	const [reward, setreward] = useState();
+	const [capital, setcapital] = useState<number>();
+	const [risk, setrisk] = useState<number>();
+	const [reward, setreward] = useState<number>();
 	const dispatch = useDispatch();
 	const data = useSelector((state: any) => state.compute);
+	// console.log(data);
+	// console.log(JSON.parse(localStorage.getItem("compute") || ""));
+	// localStorage.clear();
+	// console.log(risk);
 
 	return (
 		<div className={`${wrapStyle} lg:w-fit w-full flex  justify-center`}>
@@ -48,14 +52,30 @@ const CalcInput = () => {
 							</button>
 						</div>
 						<div className={WrapInputStyle}>
-							<input
+							{/* <input
 								type="number"
 								className={inputStyle}
 								required
 								placeholder="Reward"
 								min={1}
+							/> */}
+							<select
+								name="risk"
+								id="risk"
 								onChange={(e: any) => setreward(e.target.value)}
-							/>
+								defaultValue={"reward"}>
+								<option value="reward" disabled>
+									Risk 2 Reward
+								</option>
+								<option value="1">1:1</option>
+								<option value="2">1:2</option>
+								<option value="3">1:3</option>
+								<option value="4">1:4</option>
+								<option value="5">1:5</option>
+								<option value="6">1:6</option>
+								<option value="7">1:7</option>
+								<option value="8">1:8</option>
+							</select>
 							<button
 								disabled={!data.capital}
 								onClick={() => dispatch(increment())}
@@ -64,13 +84,32 @@ const CalcInput = () => {
 							</button>
 						</div>
 						<div className={WrapInputStyle}>
-							<input
+							{/* <input
 								type="number"
 								className={inputStyle}
-								required
+								// required
+								min="0.25 - 0.5"
+								// max={3}
 								placeholder="Risk"
 								onChange={(e: any) => setrisk(e.target.value)}
-							/>
+							/> */}
+							<select
+								name="risk"
+								id="risk"
+								onChange={(e: any) => setrisk(e.target.value)}
+								defaultValue={"risk"}>
+								<option value="risk" disabled>
+									Risk per Trede
+								</option>
+								<option value="0.12">0.12%</option>
+								<option value="0.25">0.25%</option>
+								<option value="0.50">0.50%</option>
+								<option value="1">1%</option>
+								<option value="2">2%</option>
+								<option value="3">3%</option>
+								<option value="4">4%</option>
+								<option value="5">5%</option>
+							</select>
 							<button
 								disabled={!data.capital}
 								onClick={() => dispatch(decrement())}

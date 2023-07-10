@@ -30,9 +30,12 @@ export const computeSlice = createSlice({
 	initialState,
 	reducers: {
 		setInitial: (state, action) => {
-			state.capital = action.payload.capital;
-			state.risk = action.payload.risk;
-			state.reward = action.payload.reward;
+			state.capital = Number(action.payload.capital);
+			state.risk = Number(action.payload.risk);
+			state.reward = Number(action.payload.reward);
+		},
+		getFromStorage: state => {
+			state = JSON.parse(localStorage.getItem("compute") || "");
 		},
 		saveToStorage: state => {
 			localStorage.setItem("compute", JSON.stringify(state));
@@ -54,11 +57,24 @@ export const computeSlice = createSlice({
 			state.count += 1;
 			state.losses_no -= 1;
 		},
+		reset: state => {
+			state.profits = 0;
+			state.losses = 0;
+			state.count = 0;
+			state.losses_no = 0;
+			state.profits_no = 0;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, saveToStorage, setInitial } =
-	computeSlice.actions;
+export const {
+	increment,
+	decrement,
+	saveToStorage,
+	setInitial,
+	reset,
+	getFromStorage,
+} = computeSlice.actions;
 
 export default computeSlice.reducer;

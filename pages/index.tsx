@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 // import styles from "../styles/Home.m`odule.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	ActionBtns,
 	CalcInput,
@@ -11,20 +11,18 @@ import {
 	Sumary,
 	Widget,
 } from "../components";
+import { useDispatch } from "react-redux";
+import { getFromStorage } from "../redux/slice";
 
 export default function Home() {
 	const [pickUpStyle, setPickUpStyle] = useState("bg-red-600 text-white");
 	const [pickUpBtnText, setPickUpBtnText] = useState("Find Bike");
 	const fromLocationRef = useRef<any>();
-	const handlePickUpStyle = () => {
-		setPickUpBtnText("Searching");
-		setPickUpStyle("bg-green-600 text-white");
-		setTimeout(() => {
-			setPickUpBtnText("Match");
-			setPickUpStyle("bg-blue-600 text-white");
-			setTimeout(() => {}, 2000);
-		}, 5000);
-	};
+	const dispatch = useDispatch();
+	useEffect(() => {
+		// dispatch(getFromStorage());
+		return () => {};
+	}, []);
 	const wrapStyle = `p-4`;
 	const innerWrapStyle = `p-4 bg-slate-900 w-fit flex gap-3 rounded`;
 	const inputStyle = `w-24`;
