@@ -33,7 +33,7 @@ const Detail = () => {
 								className={`${
 									data.profits > 0 ? "text-green-600" : "text-red-600"
 								} text-center`}>
-								{data.profits}
+								{data.profits.toFixed(2)}
 							</div>
 						</div>
 					</div>
